@@ -31,15 +31,12 @@ def download_coco2014(root, phase):
         os.chdir(tmpdir)
         subprocess.call('wget ' + urls[phase + '_img'], shell=True)
         os.chdir(root)
-    # extract file
     img_data = os.path.join(data, filename.split('.')[0])
     if not os.path.exists(img_data):
         print('[dataset] Extracting tar file {file} to {path}'.format(file=cached_file, path=data))
         command = 'unzip {} -d {}'.format(cached_file,data)
         os.system(command)
     print('[dataset] Done!')
-
-    # train/val images/annotations
     cached_file = os.path.join(tmpdir, 'annotations_trainval2014.zip')
     if not os.path.exists(cached_file):
         print('Downloading: "{}" to {}\n'.format(urls['annotations'], cached_file))
